@@ -32,7 +32,7 @@ class Stack:
             self.storage.remove_tail()
             self.size -= 1
             return value
-        else: 
+        else:
             return None
 
 # List implementation

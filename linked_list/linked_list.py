@@ -1,3 +1,5 @@
+from node.node import Node
+
 """
     Data:
     1. A reference to the head Node
@@ -67,7 +69,7 @@ class LinkedList:
             self.tail = None
             return value
 
-        current = sel​f.head
+        current = self.head
 
         while current.get_next() is not self.tail:
             current = current.get_next()
