@@ -1,4 +1,5 @@
 from linked_list.linked_list import LinkedList
+from stack.stack import Stack
 
 """
 A queue is a data structure whose primary purpose is to store and
@@ -18,26 +19,55 @@ Stretch: What if you could only use instances of your Stack class to implement
 """
 
 
+# Stack implementation
 class Queue:
     def __init__(self):
         self.size = 0
-        self.storage = LinkedList()
+        self.storage = [Stack(), Stack()]
 
     def __len__(self):
         return self.size
 
     def enqueue(self, value):
-        self.storage.add_to_tail(value)
-        self.size += 1
+        if self.size == 0:
+            self.storage[1].push(value)
+            self.size += 1
+        else:
+            while self.storage[1].size > 0:
+                self.storage[0].push(self.storage[1].pop())
+            self.storage[1].push(value)
+            while self.storage[0].size > 0:
+                self.storage[1].push(self.storage[0].pop())
+            self.size += 1
 
     def dequeue(self):
         if self.size > 0:
-            value = self.storage.head.get_value()
-            self.storage.remove_head()
             self.size -= 1
-            return value
+            return self.storage[1].pop()
         else:
             return None
+
+# Linked list implementation
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
+
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+#         self.storage.add_to_tail(value)
+#         self.size += 1
+
+#     def dequeue(self):
+#         if self.size > 0:
+#             value = self.storage.head.get_value()
+#             self.storage.remove_head()
+#             self.size -= 1
+#             return value
+#         else:
+#             return None
 
 
 # List implementation
